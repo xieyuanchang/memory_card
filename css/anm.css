@@ -1,0 +1,46 @@
+body{
+	background-color: #C7EDCC;
+}
+#cardTable{
+position: absolute;  
+}
+
+.card {
+width:150px;
+height:150px;
+position:relative;
+cursor:pointer;
+outline:#500000 dotted thick;
+}
+
+.card .cover{
+  position:absolute;
+  z-index:2;
+  width:0px;
+  height:150px;
+  background-image: url(/img/cover2.jpg);
+}
+
+.card img {
+width:150px;
+height:150px;
+position:absolute;
+z-index:1
+}
+
+.opened {
+cursor:not-allowed;
+}
+
+#floatDiv{
+z-index:3;
+font-weight:bold;
+font-size:19px;
+position: absolute;
+line-height:25px;
+top: 0px; 
+outline:#999999 dotted thick;
+background-image: url(/img/float.jpg);
+}
+
+
