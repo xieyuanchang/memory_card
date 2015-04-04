@@ -1,18 +1,18 @@
-
-var cardImgUrl = "/cardImg"
-var imgList = new Array();
-var numOfImg = 0;
-var numOfFinishImg = 0;
-var stopTimeCount = true;
-var timedCount = -1;
-var tryTimes = 0;
-var MAX_TIME = 9999999;
-var minPlayTime = MAX_TIME;
-var minTryTimes = MAX_TIME;
-var curCard;
-var preCard;
-var canClick = true;
-var $cardTable;
+// 全局变量定义
+var cardImgUrl = "/cardImg" // 卡片用图片保存处
+var imgList = new Array();  // 存放所有的卡片对象
+var numOfImg = 0; // 图片的数量
+var numOfFinishImg = 0; // 当前翻开的数量
+var stopTimeCount = true; // 是否停止计时 true：停止计时 false：继续计时
+var timedCount = -1; //秒单位计时器
+var tryTimes = 0; // 尝试打开次数
+var MAX_TIME = 9999999; // 最大值
+var minPlayTime = MAX_TIME; // 最高时间记录
+var minTryTimes = MAX_TIME; // 最高尝试记录
+var curCard; // 当前翻开的卡片
+var preCard; // 前一张翻开的卡片
+var canClick = true; // 是否能点击卡片
+var $cardTable; // 画面上布局卡片的位置
 
 function init(){
     $cardTable = $("#cardTable");
@@ -27,6 +27,7 @@ function unlock(){
     canClick = true;
 }
 
+// 检查翻开的两张卡片是否有效
 function checkCard() {
     if (preCard && curCard) {
         tryTimes++;
@@ -48,6 +49,7 @@ function checkCard() {
     }
 }
 
+// 将目录下的图片包装成卡片对象保存起来
 function showCardList() {
     $.get(cardImgUrl,
     function(rep) {
@@ -64,6 +66,7 @@ function showCardList() {
     });
 }
 
+// 游戏开始
 function GameStart(){
     stopTimeCount = true;
     if(tryTimes > 0 && tryTimes < minTryTimes){
@@ -88,6 +91,7 @@ function GameStart(){
     2000);
 }
 
+// 重新洗牌
 function randCardList(imgList) {
     num = imgList.length;
     for (var i = 0; i < num/2; i++) {
@@ -99,6 +103,7 @@ function randCardList(imgList) {
     return imgList;
 }
 
+// 将卡片显示在画面上
 function makeCardInTable(imgList) {
     num = imgList.length;
     maxCol = 10;
@@ -127,11 +132,13 @@ function makeCardInTable(imgList) {
     setPosition();
 }
 
+
 $(document).ready(function() {
     showCardList();
     init();
 })
 
+// 设置卡片的位置
 function setPosition(){
     $cardTable.css({ 
     left: ($(window).width() - $cardTable.outerWidth())/2, 
@@ -139,6 +146,7 @@ function setPosition(){
     });    
 }
 
+// 窗口大小改变时，自动重新设置位置
 $(window).resize(function(){ 
     setPosition();
 }); 
